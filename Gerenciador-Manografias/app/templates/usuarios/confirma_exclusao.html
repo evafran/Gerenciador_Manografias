@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load meus_filtros %}
+{% block conteudo %}
+<div class="card mb-3" style="margin-top: 10px;">
+    <div class="card-header">
+        Tem certeza que desejar remover o usuário abaixo abaixo?
+    </div>
+    <div class="card-body">
+        <h5 class="card-title"> Nome: {{ usuario.first_name }} {{ usuario.last_name }}</h5>
+        <p class="card-text"> Username: {{ usuario.username }}</p>
+        <p class="card-text"> E-mail: {{ usuario.email }}</p>
+        <p class="card-text"> Função: {{ usuario.is_superuser|display_role }}</p>
+        <hr>
+        <form method="post">
+            {% csrf_token %}
+            <a href="{{ request.META.HTTP_REFERER }}" class="btn btn-primary">Voltar</a>
+            <button class="btn btn-danger" type="submit">Remover</button>
+        </form>
+    </div>
+</div>
+
+{% endblock conteudo %}

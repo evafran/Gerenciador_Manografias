@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block conteudo %}
+
+
+<h1> Resultados da pesquisa por: "{{ termo_pesquisa }}" </h1>
+
+{% for manografia in manografias %}
+<div class="card mb-3">
+    <div class="card-header">
+    </div>
+    <div class="card-body">
+        <h5 class="card-title"> Título: {{ manografia.titulo }}</h5>
+        <p class="card-text"> Autor: {{ manografia.autor }}</p>
+        <p class="card-text"> Orientador: {{ manografia.orientador }}</p>
+        <p class="card-text"> Coorientador: {{ manografia.coorientador }}</p>
+        <p class="card-text"> Resumo: {{ manografia.resumo }}</p>
+        <p class="card-text"> Palavras Chave: {{ manografia.palavras_chave }}</p>
+        <p class="card-text"> Data de Entrega: {{ manografia.data_entrega }}</p>
+        <p class="card-text"> Banca Examinadora: {{ manografia.banca_examinadora }}</p>
+        <p class="card-text"> Nota Final: {{ manografia.nota_final }}</p>
+        <p class="card-text"> Área de Concentração: {{ manografia.area_concentracao }}</p>
+        {% if manografia.arquivopdf_set.exists %}
+            {% for pdf in manografia.arquivopdf_set.all %}
+                <p class="card-text">Arquivo PDF: <a href="{{ pdf.pdf.url }}" target="_blank">{{ pdf.pdf }}</a></p>
+            {% endfor %}
+        {% else %}
+            <p class="card-text">Essa manografia não contém PDF, clique no botão "Editar" para adicionar um</p>
+        {% endif %}
+        <hr>
+        {% if request.user.is_superuser == True %}
+        <a href="{% url 'editar_manografia' manografia.id %}"> <input type="button" class="btn btn-success"
+                value="Alterar"></a>
+        <a href="{% url 'remover_manografia' manografia.id %}"> <input type="button" class="btn btn-danger"
+                value="Remover"></a>
+        {% endif %}
+    </div>
+</div>
+{% endfor %}
+{% if request.user.is_superuser == True %}
+<a href="{% url 'cadastrar_manografia' %}"> <input type="button" class="btn btn-primary mb-3"
+        value="Cadastrar nova manografia"></a>
+{% endif %}
+{% endblock conteudo%}

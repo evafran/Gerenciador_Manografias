@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block conteudo %}
+
+<div class="text-center">
+        <h1>
+                <img src="{% static 'app/imagem/discente.png' %}" alt="discente"
+                        style="width: 45px; height: 45px; vertical-align: middle; margin-right: 5px;">
+                Discente
+        </h1>
+</div>
+
+
+{% for discente in discentes %}
+<div class="card mb-3">
+        <div class="card-header">
+        </div>
+        <div class="card-body">
+                <h5 class="card-title"> Nome: {{ discente.nome }} {{ discente.sobrenome }}</h5>
+                <p class="card-text"> Matricula: {{ discente.matricula }}</p>
+                <hr>
+                {% if request.user.is_superuser == True %}
+                <a href="{% url 'editar_discente' discente.id %}"> <input type="button" class="btn btn-success"
+                                value="Editar"></a>
+                <a href="{% url 'remover_discente' discente.id %}"> <input type="button" class="btn btn-danger"
+                                value="Remover"></a>
+                {% endif %}
+        </div>
+</div>
+{% endfor %}
+{% if request.user.is_superuser == True %}
+<a href="{% url 'cadastrar_discente' %}"> <input type="button" class="btn btn-primary mb-3"
+                value="Cadastrar novo discente"></a>
+{% endif %}
+
+{% endblock conteudo%}

@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% load meus_filtros %}
+{% block conteudo %}
+
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="form-group">
+        {{ form_manoagrafia.titulo.errors }}
+        <label>Título: </label>
+        {{ form_manografia.titulo|addclass:'form-control' }}
+    </div>
+    <div class="form-group">
+        {{ form_manoagrafia.autor.errors }}
+        <label>Autor: </label>
+        {{ form_manografia.autor|addclass:'form-control'}}
+    </div>
+    <div class="form-group">
+        {{ form_manografia.orientador.errors }}
+        <label>Orientador: </label>
+        {{ form_manografia.orientador|addclass:'form-control' }}
+    </div>
+    <div class="form-group">
+        {{ form_manografia.coorientador.errors }}
+        <label>Coorientador: </label>
+        {{ form_manografia.coorientador|addclass:'form-control' }}
+    </div>
+    <div class="form-group">
+        {{ form_manografia.resumo.errors }}
+        <label>Resumo: </label>
+        {{ form_manografia.resumo|addclass:'form-control' }}
+    </div>
+    <div class="form-group">
+        {{ form_manografia.palavras_chave.errors }}
+        <label>Palavras Chave: </label>
+        {{ form_manografia.palavras_chave|addclass:'form-control' }}
+    </div>
+    <div class="form-group">
+        {{ form_manografia.data_entrega.errors }}
+        <label for="id_data_entrega">Data de Entrega:</label>
+        {{ form_manografia.data_entrega|addclass:'form-control' }}
+    </div>
+    <div class="form-group">
+        {{ form_manografia.banca_examinadora.errors }}
+        <label>Banca Examinadora : </label>
+        {{ form_manografia.banca_examinadora|addclass:'form-control' }}
+    </div>
+    <div class="form-group">
+        {{ form_manografia.nota_final.errors }}
+        <label>Nota Final: </label>
+        {{ form_manografia.nota_final|addclass:'form-control' }}
+    </div>
+    <div class="form-group">
+        {{ form_manografia.area_concentracao.errors }}
+        <label>Área de Concentração: </label>
+        {{ form_manografia.area_concentracao|addclass:'form-control' }}
+    </div>
+    <div class="form-group">
+        {{ form_pdf.pdf.errors }}
+        <label for="id_arquivo_pdf">Arquivo PDF: </label>
+        {{ form_pdf.pdf }}
+    </div>
+
+    <div class="form_group" style="margin-top: 10px;">
+        <input type="submit" class="btn btn-primary mb-3" value="Salvar">
+    </div>
+</form>
+
+<script>
+    $(document).ready(function () {
+        $('#id_data_entrega').datepicker({
+            dateFormat: 'yy-mm-dd'
+        });
+    });
+</script>
+
+{% endblock conteudo %}

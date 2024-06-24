@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block conteudo %}
+<div class="card mb-3" style="margin-top: 10px;">
+    <div class="card-header">
+        Tem certeza que desejar remover o docente abaixo?
+    </div>
+    <div class="card-body">
+        <h5 class="card-title"> Nome: {{ docente.nome }} {{ docente.sobrenome }}</h5>
+        <hr>
+        <form method="post">
+            {% csrf_token %}
+            <a href="{{ request.META.HTTP_REFERER }}" class="btn btn-primary">Voltar</a>
+            <button class="btn btn-danger" type="submit">Remover</button>
+        </form>
+    </div>
+</div>
+
+{% endblock conteudo %}

@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load meus_filtros %}
+{% load static %}
+{% block conteudo %}
+
+<div class="container-fluid">
+    <div class="text-center">
+        <h1>
+            <img src="{% static 'app/imagem/user.png' %}" alt="user"
+                style="width: 40px; height: 40px; vertical-align: middle; margin-right: 5px;">
+                Usuários
+        </h1>
+    </div>
+</div>
+
+{% for usuario in usuarios %}
+<div class="card mb-3">
+    <div class="card-header">
+    </div>
+    <div class="card-body">
+        <h5 class="card-title"> Nome: {{ usuario.first_name }} {{ usuario.last_name }}</h5>
+        <p class="card-text"> Username: {{ usuario.username }}</p>
+        <p class="card-text"> E-mail: {{ usuario.email }}</p>
+        <p class="card-text"> Função: {{ usuario.is_superuser|display_role }}</p>
+        <hr>
+        <a href="{% url 'editar_usuario' usuario.id %}"> <input type="button" class="btn btn-success"
+                value="Editar"></a>
+        <a href="{% url 'remover_usuario' usuario.id %}"> <input type="button" class="btn btn-danger"
+                value="Remover"></a>
+    </div>
+</div>
+{% endfor %}
+{% if request.user.is_superuser == True %}
+<a href="{% url 'cadastrar_usuario' %}"> <input type="button" class="btn btn-primary mb-3" value="Cadastrar usuário"></a>
+{% endif %}
+{% endblock conteudo %}

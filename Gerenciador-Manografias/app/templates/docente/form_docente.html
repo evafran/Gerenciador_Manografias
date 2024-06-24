@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load meus_filtros %}
+
+{% block titulo %}
+Cadastro de Docente
+{% endblock titulo %}
+
+{% block conteudo %}
+
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="form-group">
+        <label>Nome: </label>
+        {{ form_docente.nome|addclass:'form-control' }}
+        {{ form_docente.nome.errors }}
+    </div>
+    <div class="form-group">
+        <label>Sobrenome: </label>
+        {{ form_docente.sobrenome|addclass:'form-control'}}
+        {{ form_docente.sobrenome.errors }}
+    </div>
+
+    <div class="form_group" style="margin-top: 10px;">
+        <input type="submit" class="btn btn-primary mb-3" value="Salvar">
+    </div>
+</form>
+
+{% endblock conteudo %}

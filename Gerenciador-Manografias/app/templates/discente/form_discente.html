@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load meus_filtros %}
+
+{% block titulo %}
+Cadastro de Discente
+{% endblock titulo %}
+
+{% block conteudo %}
+
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="form-group">
+        <label>Nome: </label>
+        {{ form_discente.nome|addclass:'form-control' }}
+        {{ form_discente.nome.errors }}
+    </div>
+    <div class="form-group">
+        <label>Sobrenome: </label>
+        {{ form_discente.sobrenome|addclass:'form-control'}}
+        {{ form_discente.sobrenome.errors }}
+    </div>
+    <div class="form-group">
+        <label>Matrícula: </label>
+        {{ form_discente.matricula|addclass:'form-control'}}
+        {{ form_discente.matricula.errors }}
+    </div>
+
+    <div class="form_group" style="margin-top: 10px;">
+        <input type="submit" class="btn btn-primary mb-3" value="Salvar">
+    </div>
+</form>
+
+{% endblock conteudo %}

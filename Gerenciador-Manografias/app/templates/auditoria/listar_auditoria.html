@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block conteudo %}
+
+    <div class="text-center">
+        <h1>
+            <img src="{% static 'app/imagem/log.png' %}" alt="log"
+                style="width: 40px; height: 40px; vertical-align: middle; margin-right: 5px;">
+            Auditoria
+        </h1>
+    </div>
+
+
+{% for auditoria in auditorias %}
+<div class="card mb-3">
+    <div class="card-header">
+    </div>
+    <div class="card-body">
+        <h5 class="card-title"> Manografia: {{ auditoria.titulo_manografia }}</h5>
+        <p class="card-text"> Usuário: {{ auditoria.usuario.username }}</p>
+        <p class="card-text"> Ação: {{ auditoria.acao }}</p>
+        <p class="card-text"> Data/Hora: {{ auditoria.data_hora }}</p>
+        <p class="card-text"> Detalhes: {{ auditoria.detalhes }}</p>
+    </div>
+</div>
+{% endfor %}
+
+{% endblock conteudo%}
